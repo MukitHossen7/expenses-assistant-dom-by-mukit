@@ -1,9 +1,4 @@
-// let income = document.getElementById("income");
-// let software = document.getElementById("software");
-// let courses = document.getElementById("courses");
-// let internet = document.getElementById("internet");
-
-//Calculate function
+//Calculate function Code
 
 function getInputById(id) {
   const inputValue = parseFloat(document.getElementById(id).value);
@@ -18,6 +13,21 @@ document.getElementById("calculate").addEventListener("click", function () {
   let balance = income - expensesAmount;
   document.getElementById("total-expenses").innerText = expensesAmount;
   document.getElementById("balance").innerText = balance;
+  document.getElementById("results").classList.remove("hidden");
+
+  //Expense History function code
+
+  let historyList = document.getElementById("history-list");
+  let div = document.createElement("div");
+  div.innerHTML = `
+     <div class="flex flex-col bg-white shadow-sm rounded-md p-4">
+     <span class="text-xs text-gray-500">Date: ${new Date().toLocaleDateString()}</span>
+      <span class="text-xs text-gray-500">Income: ৳${income}</span>
+       <span class="text-xs text-gray-500">Expenses: ৳${expensesAmount}</span>
+        <span class="text-xs text-gray-500">Balance: ৳${balance}</span>
+     </div>
+  `;
+  historyList.insertBefore(div, historyList.children[0]);
   document.getElementById("results").classList.remove("hidden");
 });
 
@@ -43,17 +53,7 @@ document
     document.getElementById("remaining-balance").innerText = remainingBalance;
   });
 
-//History Button Section
-// function getStyleButtonById(id) {
-//   let buttonStyle = document.getElementById(id);
-//   buttonStyle.classList.add(
-//     "text-white",
-//     "bg-gradient-to-r",
-//     "from-blue-500",
-//     "to-purple-600"
-//   );
-//   return buttonStyle;
-// }
+//History Tab Button
 document.getElementById("history-tab").addEventListener("click", function () {
   let historyBtn = document.getElementById("history-tab");
   historyBtn.classList.add(
@@ -69,8 +69,12 @@ document.getElementById("history-tab").addEventListener("click", function () {
     "from-blue-500",
     "to-purple-600"
   );
+
+  document.getElementById("expense-form").classList.add("hidden");
+  document.getElementById("history-section").classList.remove("hidden");
 });
 
+//Assistant Tab Button
 document.getElementById("assistant-tab").addEventListener("click", function () {
   let historyBtn = document.getElementById("history-tab");
   historyBtn.classList.remove(
@@ -86,4 +90,6 @@ document.getElementById("assistant-tab").addEventListener("click", function () {
     "from-blue-500",
     "to-purple-600"
   );
+  document.getElementById("expense-form").classList.remove("hidden");
+  document.getElementById("history-section").classList.add("hidden");
 });
