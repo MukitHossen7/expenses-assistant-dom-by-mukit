@@ -11,6 +11,19 @@ document.getElementById("calculate").addEventListener("click", function () {
   let internet = getInputById("internet");
   let expensesAmount = software + courses + internet;
   let balance = income - expensesAmount;
+
+  if (income < 0 || expensesAmount > income) {
+    document.getElementById("income-error").classList.remove("hidden");
+    return;
+  }
+  if (isNaN(income) || isNaN(software) || isNaN(courses) || isNaN(internet)) {
+    document.getElementById("income-error").classList.remove("hidden");
+    document.getElementById("software-error").classList.remove("hidden");
+    document.getElementById("courses-error").classList.remove("hidden");
+    document.getElementById("internet-error").classList.remove("hidden");
+    return;
+  }
+
   document.getElementById("total-expenses").innerText = expensesAmount;
   document.getElementById("balance").innerText = balance;
   document.getElementById("results").classList.remove("hidden");
